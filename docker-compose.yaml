@@ -4,12 +4,18 @@ services:
     extends:
       service: realsense
     image: "rviz:latest"
+    environment:
+      QT_X11_NO_MITSHM: 1
+      DISPLAY: ${DISPLAY}
     command: ros2 run rviz2 rviz2
 
   calibration:
     extends:
       service: realsense
     image: "calibration:latest"
+    environment:
+      QT_X11_NO_MITSHM: 1
+      DISPLAY: ${DISPLAY}
     command: >
       ros2 run camera_calibration cameracalibrator
       --no-service-check
@@ -32,13 +38,8 @@ services:
         - USERNAME=${USERNAME}
     image: "realsense:latest"
     network_mode: host
-    # ipc: host
-    privileged: true
-    tty: true
-    stdin_open: true
-    environment:
-      QT_X11_NO_MITSHM: 1
-      DISPLAY: ${DISPLAY}
+    ipc: host
+    init: true
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /dev:/dev
@@ -53,4 +54,7 @@ services:
       enable_color:=false
       enable_depth:=false
       enable_infra1:=true
+      enable_gyro:=true
+      enable_accel:=true
+      unite_imu_method:=2
       json_file_path:=/config/advanced.json
