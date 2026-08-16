@@ -11,8 +11,9 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     python3-colcon-common-extensions \
     ros-${ROS_DISTRO}-camera-calibration \
-    ros-${ROS_DISTRO}-librealsense2* \
-    ros-${ROS_DISTRO}-realsense2-* \
+    ros-${ROS_DISTRO}-librealsense2 \
+    ros-${ROS_DISTRO}-realsense2-camera \
+    ros-${ROS_DISTRO}-realsense2-description \
     ros-${ROS_DISTRO}-rviz2 \
     && rm -rf /var/lib/apt/lists/*
 
