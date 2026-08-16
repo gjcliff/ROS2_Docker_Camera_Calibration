@@ -2,7 +2,7 @@ services:
 
   rviz:
     extends:
-      service: base
+      service: realsense
     image: "rviz:latest"
     command: ros2 run rviz2 rviz2
 

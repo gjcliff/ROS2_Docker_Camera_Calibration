@@ -13,6 +13,7 @@ RUN apt-get update && \
     ros-${ROS_DISTRO}-camera-calibration \
     ros-${ROS_DISTRO}-librealsense2* \
     ros-${ROS_DISTRO}-realsense2-* \
+    ros-${ROS_DISTRO}-rviz2 \
     && rm -rf /var/lib/apt/lists/*
 
 # create non-root user without sudo
