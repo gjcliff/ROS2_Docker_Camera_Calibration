@@ -40,6 +40,7 @@ services:
     network_mode: host
     ipc: host
     init: true
+    privileged: true
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /dev:/dev

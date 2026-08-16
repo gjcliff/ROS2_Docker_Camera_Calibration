@@ -24,4 +24,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 USER $USERNAME
 
+COPY ./advanced.json /config/advanced/json
+
 ENTRYPOINT ["/ros_entrypoint.sh"]

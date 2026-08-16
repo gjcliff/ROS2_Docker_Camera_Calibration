@@ -1,5 +1,7 @@
 {
     "ignoreSAD": "0",
+    "controls-laserstate": "off",
+    "controls-laserpower": "0",
     "param-censusenablereg-udiameter": "9",
     "param-censusenablereg-vdiameter": "3",
     "param-censususize": "9",
