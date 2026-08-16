@@ -1,0 +1,56 @@
+services:
+
+  rviz:
+    extends:
+      service: base
+    image: "rviz:latest"
+    command: ros2 run rviz2 rviz2
+
+  calibration:
+    extends:
+      service: realsense
+    image: "calibration:latest"
+    command: >
+      ros2 run camera_calibration cameracalibrator
+      --no-service-check
+      --pattern charuco
+      --size 5x7
+      --square 0.0320
+      --charuco_marker_size 0.0246
+      --aruco_dict 6x6_250
+      --ros-args
+      --remap image:=/camera/infra1/image_rect_raw
+      --remap camera:=/camera/infra1
+
+  realsense:
+    build: 
+      context: .
+      dockerfile: camera.Dockerfile
+      args:
+        - USER_UID=1001
+        - USER_GID=1001
+        - USERNAME=${USERNAME}
+    image: "realsense:latest"
+    network_mode: host
+    # ipc: host
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      QT_X11_NO_MITSHM: 1
+      DISPLAY: ${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev:/dev
+      - ./advanced.json:/config/advanced.json:ro
+    device_cgroup_rules:
+      - 'c 81:* rmw'
+      - 'c 189:* rmw'
+    command: > 
+      ros2 launch realsense2_camera rs_launch.py 
+      camera_name:=camera
+      camera_namespace:=/
+      enable_color:=false
+      enable_depth:=false
+      enable_infra1:=true
+      json_file_path:=/config/advanced.json
