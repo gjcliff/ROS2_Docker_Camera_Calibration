@@ -9,24 +9,39 @@ services:
       DISPLAY: ${DISPLAY}
     command: ros2 run rviz2 rviz2
 
-  calibration:
+  charuco-calibration:
     extends:
       service: realsense
-    image: "calibration:latest"
+    image: "charuco_calibration:latest"
     environment:
       QT_X11_NO_MITSHM: 1
       DISPLAY: ${DISPLAY}
     command: >
       ros2 run camera_calibration cameracalibrator
       --no-service-check
+      --square 0.0320
       --pattern charuco
       --size 5x7
-      --square 0.0320
       --charuco_marker_size 0.0246
       --aruco_dict 6x6_250
       --ros-args
       --remap image:=/camera/infra1/image_rect_raw
       --remap camera:=/camera/infra1
+
+  checkerboard-calibration:
+    extends:
+      service: realsense
+    image: "checkerboard_calibration:latest"
+    environment:
+      QT_X11_NO_MITSHM: 1
+      DISPLAY: ${DISPLAY}
+    command: >
+      ros2 run camera_calibration cameracalibrator
+      --no-service-check
+      --size 5x8
+      --square 0.0257
+      --ros-args
+      --remap image:=/camera/infra1/image_rect_raw
 
   realsense:
     build: 
