@@ -1,14 +1,15 @@
-# Realsense D435i Camera Calibration
-This repo lets you calibrate your realsense of this specific model using either
-opencv chessboards or charuco boards.
+# ROS2 Docker Camera Calibration
+This repo lets you calibrate USB cams, and realsenses, using either opencv
+chessboards or charuco boards.
 
 It makes use of this awesome ROS2 package:
 https://docs.ros.org/en/jazzy/p/camera_calibration/doc/index.html
 
+This project is still being tweaked as of 20260819.
+
 ## Setup
 Install docker engine:
 https://docs.docker.com/engine/install/
-
 
 **Nvidia Container Tookit** (Optional(?)):
 https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#with-apt-ubuntu-debian
@@ -16,6 +17,7 @@ https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install
 ```bash
 docker compose build
 docker compose up realsense
+docker compose up usb_cam
 docker compose up realsense rviz
 docker compose up realsense calibration
 ```
