@@ -27,6 +27,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 USER $USERNAME
 
-COPY ./advanced.json /config/advanced/json
+COPY ./advanced.json /config/advanced.json
+COPY ./usb_cam_params.yaml /config/usb_cam_params.yaml
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
