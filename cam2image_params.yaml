@@ -1,0 +1,21 @@
+/cam2image:
+  ros__parameters:
+    burger_mode: false
+    depth: 10
+    device_id: 6
+    frame_id: camera_frame
+    frequency: 30.0
+    height: 240
+    history: keep_all
+    qos_overrides:
+      /parameter_events:
+        publisher:
+          depth: 1000
+          durability: volatile
+          history: keep_last
+          reliability: reliable
+    reliability: reliable
+    show_camera: false
+    start_type_description_service: true
+    use_sim_time: false
+    width: 320

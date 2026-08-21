@@ -45,7 +45,7 @@ services:
       --remap image:=/camera/image_raw
       --remap camera:=/camera
 
-  usb_cam:
+  cam2image:
     build: 
       context: .
       dockerfile: camera.Dockerfile
@@ -53,7 +53,7 @@ services:
         - USER_UID=1001
         - USER_GID=1001
         - USERNAME=${USERNAME}
-    image: "usb_cam:latest"
+    image: "cam2image:latest"
     network_mode: host
     ipc: host
     init: true
@@ -64,11 +64,10 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /dev:/dev
     command: >
-      ros2 run usb_cam usb_cam_node_exe --ros-args
-      --params-file /config/usb_cam_params.yaml
-      -r /image_raw:=/camera/image_raw
-      -r /image_raw/compressed:=/camera/image_raw/compressed
-      -r /camera_info:=/camera/camera_info
+      ros2 run image_tools cam2image --ros-args 
+      --params-file /config/cam2image_params.yaml
+      -r /image:=/camera/image_raw
+      --log-level warn
 
   realsense:
     build: 

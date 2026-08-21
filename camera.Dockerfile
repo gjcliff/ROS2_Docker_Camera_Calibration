@@ -15,7 +15,7 @@ RUN apt-get update && \
     ros-${ROS_DISTRO}-librealsense2 \
     ros-${ROS_DISTRO}-realsense2-camera \
     ros-${ROS_DISTRO}-realsense2-description \
-    ros-${ROS_DISTRO}-usb-cam \
+    ros-${ROS_DISTRO}-image-tools \
     ros-${ROS_DISTRO}-rviz2 \
     && rm -rf /var/lib/apt/lists/*
 
@@ -28,6 +28,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
 USER $USERNAME
 
 COPY ./advanced.json /config/advanced.json
-COPY ./usb_cam_params.yaml /config/usb_cam_params.yaml
+COPY ./cam2image_params.yaml /config/cam2image_params.yaml
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
