@@ -27,7 +27,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 USER $USERNAME
 
-COPY ./advanced.json /config/advanced.json
 COPY ./launch.py /launch.py
 COPY ./params/ /params/
 
