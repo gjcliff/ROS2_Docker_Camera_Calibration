@@ -20,6 +20,9 @@ docker compose up realsense
 docker compose up usb_cam
 docker compose up realsense rviz
 docker compose up realsense calibration
+
+# once calibration is done
+docker cp <container_name>:/tmp/calibrationdata.tar.gz ./calibration_data/calibrationdata.tar.gz
 ```
 
 ### useful links

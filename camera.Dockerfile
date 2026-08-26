@@ -28,6 +28,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 USER $USERNAME
 
 COPY ./advanced.json /config/advanced.json
-COPY ./cam2image_params.yaml /config/cam2image_params.yaml
+COPY ./launch.py /launch.py
+COPY ./params/ /params/
 
 ENTRYPOINT ["/ros_entrypoint.sh"]

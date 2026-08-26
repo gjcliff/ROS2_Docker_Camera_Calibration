@@ -18,16 +18,7 @@ services:
       DISPLAY: ${DISPLAY}
       FASTDDS_BUILTIN_TRANSPORTS: UDPv4
     command: >
-      ros2 run camera_calibration cameracalibrator
-      --no-service-check
-      --square 0.0320
-      --pattern charuco
-      --size 5x7
-      --charuco_marker_size 0.0246
-      --aruco_dict 6x6_250
-      --ros-args
-      --remap image:=/camera/image_raw
-      --remap camera:=/camera
+      ros2 launch /launch.py calibration_board:=charuco
 
   checkerboard-calibration:
     extends:
@@ -37,13 +28,7 @@ services:
       QT_X11_NO_MITSHM: 1
       DISPLAY: ${DISPLAY}
     command: >
-      ros2 run camera_calibration cameracalibrator
-      --no-service-check
-      --size 5x8
-      --square 0.0257
-      --ros-args
-      --remap image:=/camera/image_raw
-      --remap camera:=/camera
+      ros2 launch /launch.py calibration_board:=checkerboard
 
   cam2image:
     build: 
@@ -63,11 +48,9 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /dev:/dev
+      - ./launch.py:/launch.py
     command: >
-      ros2 run image_tools cam2image --ros-args 
-      --params-file /config/cam2image_params.yaml
-      -r /image:=/camera/image_raw
-      --log-level warn
+      ros2 launch /launch.py use_cam2image:=true
 
   realsense:
     build: 
@@ -87,20 +70,9 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /dev:/dev
+      - ./launch.py:/launch.py
     device_cgroup_rules:
       - 'c 81:* rmw'
       - 'c 189:* rmw'
     command: >
-      ros2 run realsense2_camera realsense2_camera_node
-      --ros-args
-      -r __node:=camera
-      -r __ns:=/
-      -r /camera/infra1/image_rect_raw:=/camera/image_raw
-      -r /camera/infra1/camera_info:=/camera/camera_info
-      -p enable_color:=false
-      -p enable_depth:=false
-      -p enable_infra1:=true
-      -p enable_gyro:=true
-      -p enable_accel:=true
-      -p unite_imu_method:=2
-      -p json_file_path:=/config/advanced.json
+      ros2 launch /launch.py use_realsense:=true
