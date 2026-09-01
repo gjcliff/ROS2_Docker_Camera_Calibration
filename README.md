@@ -2,7 +2,8 @@
 This repo lets you calibrate USB cams, and realsenses, using either opencv
 chessboards or charuco boards.
 
-This is not a ros2 package.
+This is not a ros2 package that you can put into your src/ directory at this
+moment in time. This is meant to be used within docker only.
 
 This repo makes use of this awesome ROS2 package:
 https://docs.ros.org/en/jazzy/p/camera_calibration/doc/index.html
