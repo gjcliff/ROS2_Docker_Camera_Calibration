@@ -19,6 +19,10 @@ def generate_launch_description():
                 default_value="false",
             ),
             DeclareLaunchArgument(
+                "realsense_params_filepath",
+                default_value="/params/realsense_params.yaml",
+            ),
+            DeclareLaunchArgument(
                 "use_cam2image",
                 default_value="false",
             ),
@@ -49,7 +53,7 @@ def generate_launch_description():
                 namespace="",
                 executable="realsense2_camera_node",
                 name=LaunchConfiguration("camera_name"),
-                parameters=["/params/realsense_params.yaml"],
+                # parameters=["/params/realsense_params.yaml"],
                 remappings=[
                     (
                         (LaunchConfiguration("camera_name"), "/infra1/image_rect_raw"),
@@ -64,6 +68,9 @@ def generate_launch_description():
                     "--ros-args",
                     "--log-level",
                     LaunchConfiguration("log_level"),
+                    "--ros-args",
+                    "--params-file",
+                    LaunchConfiguration("realsense_params_filepath")
                 ],
                 condition=IfCondition(LaunchConfiguration("use_realsense")),
             ),

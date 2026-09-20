@@ -49,6 +49,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /dev:/dev
       - ./launch.py:/launch.py
+      - ./params/:/params/
     command: >
       ros2 launch /launch.py use_cam2image:=true
 
@@ -71,6 +72,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /dev:/dev
       - ./launch.py:/launch.py
+      - ./params/:/params/
     device_cgroup_rules:
       - 'c 81:* rmw'
       - 'c 189:* rmw'
