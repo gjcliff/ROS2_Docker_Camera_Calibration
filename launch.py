@@ -43,6 +43,7 @@ def generate_launch_description():
                 "checker_board_square_len",
                 default_value="0.032",
             ),
+            DeclareLaunchArgument("output_path", default_value="/calibration_data"),
             DeclareLaunchArgument("camera_name", default_value="camera"),
             DeclareLaunchArgument(
                 "log_level",
@@ -106,6 +107,8 @@ def generate_launch_description():
                     "0.0246",
                     "--aruco_dict",
                     "6x6_250",
+                    "--output_path",
+                    LaunchConfiguration("output_path"),
                     "--ros-args",
                     "--log-level",
                     LaunchConfiguration("log_level"),
