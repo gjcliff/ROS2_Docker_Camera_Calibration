@@ -1,0 +1,3 @@
+[submodule "external/image_pipeline"]
+	path = external/image_pipeline
+	url = git@github.com:gjcliff/image_pipeline.git
