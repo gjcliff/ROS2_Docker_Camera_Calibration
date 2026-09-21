@@ -2,10 +2,6 @@
 FROM ros:jazzy-ros-base AS builder
 ENV DEBIAN_FRONTEND=noninteractive
 
-# RUN apt-get update \
-#     && apt-get install -y --no-install-recommends python3-colcon-common-extensions \
-#     && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /ros_ws
 COPY ./external/ src/
 
